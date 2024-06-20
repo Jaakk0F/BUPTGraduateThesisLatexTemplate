@@ -1,0 +1,106 @@
+\documentclass[master,phil,fulltime,electronic,cenhdr,normaltoc]{buptthesis} % 学硕电子版
+%\documentclass[master,phil,fulltime,print,cenhdr,normaltoc]{buptthesis} % 学硕印刷版
+%\documentclass[master,eng,fulltime,electronic,cenhdr,normaltoc]{buptthesis} % 专硕电子版
+%\documentclass[master,eng,fulltime,print,cenhdr,normaltoc]{buptthesis} % 专硕印刷版
+%\documentclass[phd,phil,fulltime,electronic,cenhdr,normaltoc]{buptthesis} % 学博电子版
+%\documentclass[phd,phil,fulltime,print,cenhdr,normaltoc]{buptthesis} % 学博印刷版
+%\documentclass[phd,eng,fulltime,electronic,cenhdr,normaltoc]{buptthesis} % 专博电子版
+%\documentclass[phd,eng,fulltime,print,cenhdr,normaltoc]{buptthesis} % 专博印刷版
+
+
+% !UPDATE 20231210: add to remove `normaltoc` to remove table content in the toc
+
+% 点子版和印刷版的区别
+% 1. 电子版是没有跳偶数页，所有内容都是直接连起来的
+% 2. 印刷版部分内容跳偶数页开头的，生成的PDF直接双页打印即可
+
+\usepackage{graphicx}
+\usepackage{bbding}
+\usepackage{booktabs}
+\usepackage{bicaption}
+\usepackage{float}
+\usepackage{gbt7714}
+\usepackage{fontspec}
+
+% 定义使用的函数/宏
+\DeclareMathOperator{\Tr}{Tr}
+
+% 正文当中的其他定义
+\setmainfont{Times New Roman}
+\setmathfont{XITS Math}
+
+\BUPTthesiscntitlepage{%
+	confidential = {公开}, % 目前只支持公开
+	title = {文章 \\ 标题 },  % 本章标题
+	studentid = {2021123456}, % 学号
+	name = {你的名字}, % 姓名
+	major = {专业名称}, % 专业名称
+	supervisor = {你的导师}, % 导师姓名
+	institute = {你的学院} % 学院名称
+}
+
+%% \quad 相当于一个汉字的宽度，同时也相当于~~~~
+
+\BUPTdateOptions{%
+    pageYear = {2024}, % 封面上面的年
+    pageMonth = {5}, % 封面上面的月
+    pageDay = {30}, % 封面上面的天
+    dissertationYear = {2024}, % 答辩时间的年
+    dissertationMonth = {5}, % 答辩时间的月
+    dissertationDay = {30} % 答辩时间的天
+}
+
+\BUPTthesisentitlepage{%
+	confidentialEN = {Public},  % 目前只支持公开
+	titleEN = {Thesis \\ Title}, % 本章标题
+	nameEN = {Your Name}, % 姓名
+	majorEN = {Your Major}, % 专业名称
+	supervisorEN = {Your Boss}, % 导师姓名
+	instituteEN = {Your Institute} % 学院名称
+}
+
+\BUPTdissertationcommitteepage{%
+	committeeChairName = {教授1}, % 主席名称
+	committeeChairTitle = {教授}, % 主席职称
+	committeeChairOrgan = {北京邮电大学}, % 主席单位
+	committeeMemberFirstName = {名称2}, % 委员1名称
+	committeeMemberFirstTitle = {教授},
+	committeeMemberFirstOrgan = {北京邮电大学},
+	committeeMemberSecondName = {名称3},
+	committeeMemberSecondTitle = {教授},
+	committeeMemberSecondOrgan = {北京邮电大学},
+	committeeSecretaryName = {名称4}, % 秘书名称
+	committeeSecretaryTitle = {副教授},
+	committeeSecretaryOrgan = {北京邮电大学},
+}
+% 最多支持四个委员，分别从First->Fourth，不指定参数就为空
+
+\begin{document}
+
+\makechinesetitle
+\makeenglishtitle
+\makecommitteelist
+\makestatement
+
+\frontmatter
+\include{Chapter/Chapter_cnabstract} % 中文摘要
+\include{Chapter/Chapter_enabstract} % 英文摘要
+\tableofcontents
+\include{Chapter/Chapter_nomeclature} % 符号表
+% \listoffigures % NOTE:20230103旧模板
+% \listoftables % NOTE:20230103旧模板
+
+\mainmatter
+\include{Chapter/Chapter_Example}
+
+\bibliographystyle{gbt7714-numerical}
+{\zihao{5}
+	\bibliography{Bib/thesis}
+}
+
+\backmatter
+\include{Chapter/Chapter_abbreviation} % 缩写附录，暂时还没有写这里
+\include{Chapter/Chapter_acknowledgement} % 致谢
+\include{Chapter/Chapter_publication} % 创新成果
+
+\end{document}

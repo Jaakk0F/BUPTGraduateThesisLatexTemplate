@@ -1,0 +1,30 @@
+INFO:  latexindent.exe version 3.20.3, 2023-02-19, a script to indent .tex files
+       latexindent.exe lives here: D:/Program Files/LaTeX/texlive/2023/bin/windows/
+       Thu Jun 20 19:55:46 2024
+       Filename: d:/Files/OneDrive/OneDrive - bupt.edu.cn/Research/Ë¶Ê¿/Òü½¨ÇÛ/project/±ÏÒµ¿ÎÌâ/±ÏÒµÂÛÎÄ/LaTeX/±±ÓÊË¶Ê¿ÂÛÎÄLatexÄ£°å/Chapter/__latexindent_temp_Chapter_Example.tex
+INFO:  Processing switches:
+       -y|--yaml: YAML settings specified via command line
+       -c|--cruft: cruft directory
+INFO:  Directory for backup files and d:/Files/OneDrive/OneDrive - bupt.edu.cn/Research/Ë¶Ê¿/Òü½¨ÇÛ/project/±ÏÒµ¿ÎÌâ/±ÏÒµÂÛÎÄ/LaTeX/±±ÓÊË¶Ê¿ÂÛÎÄLatexÄ£°å//indent.log:
+       d:/Files/OneDrive/OneDrive - bupt.edu.cn/Research/Ë¶Ê¿/Òü½¨ÇÛ/project/±ÏÒµ¿ÎÌâ/±ÏÒµÂÛÎÄ/LaTeX/±±ÓÊË¶Ê¿ÂÛÎÄLatexÄ£°å/
+INFO:  YAML settings read: defaultSettings.yaml
+       Reading defaultSettings.yaml from D:/Program Files/LaTeX/texlive/2023/bin/windows/defaultSettings.yaml
+       Reading defaultSettings.yaml (2nd attempt) from D:/Program Files/LaTeX/texlive/2023/bin/windows/../../texmf-dist/scripts/latexindent/defaultSettings.yaml
+       and then, if necessary, D:/Program Files/LaTeX/texlive/2023/bin/windows/LatexIndent/defaultSettings.yaml
+INFO:  YAML reading settings
+       Home directory is C:\Users\FJJ
+       latexindent.pl didn't find indentconfig.yaml or .indentconfig.yaml
+       see all possible locations: https://latexindentpl.readthedocs.io/en/latest/sec-appendices.html#indentconfig-options)
+INFO:  YAML settings read: -y switch
+       YAML setting: defaultIndent:'  '
+       single-quoted string found in -y switch: '  ', substitute to   
+       Updating mainSettings with defaultIndent:   
+INFO:  Phase 1: searching for objects
+INFO:  Phase 2: finding surrounding indentation
+INFO:  Phase 3: indenting objects
+INFO:  Phase 4: final indentation check
+INFO:  Output routine:
+       Not outputting to file; see -w and -o switches for more options.
+       --------------
+INFO:  Please direct all communication/issues to:
+        https://github.com/cmhughes/latexindent.pl
