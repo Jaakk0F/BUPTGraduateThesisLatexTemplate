@@ -22,9 +22,9 @@
 - `Chapter/Chapter_publications.tex`：创新成果
 - `Chapter/Chapter_experience.tex`: 作者学习经历
 
-
 ## 改动日志
 
+- 2025.01.16：根据"学校 2025 年 1 月 15 日版本更新内容"进行修改
 - 2024.06.20：初始版本，基本符合模板要求
 
 ## 致谢
