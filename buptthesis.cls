@@ -721,6 +721,8 @@
 %% Publication
 \newenvironment{publication}[1][\BUPT@label@publications]{\chapter{#1}}{}
 
+%% Experience
+\newenvironment{experience}[1][\BUPT@label@experience]{\chapter{#1}}{}
 %% Hyperref package setup
 %\ifBUPT@option@electronic
 %  \hypersetup{%
