@@ -20,6 +20,7 @@
 - `Chapter/Chapter_cnabstract.tex`：中文摘要
 - `Chapter/Chapter_acknowledgements.tex`：致谢
 - `Chapter/Chapter_publications.tex`：创新成果
+- `Chapter/Chapter_experience.tex`: 作者学习经历
 
 
 ## 改动日志
