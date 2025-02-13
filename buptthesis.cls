@@ -169,19 +169,12 @@
 \RequirePackage{multirow}
 
 %% Specialzed List Packages
-%\RequirePackage{algorithm2e}
-%\RequirePackage{algorithmic}
-%\RequirePackage[compatible]{algpseudocode}
+\RequirePackage{algorithmic}
+\RequirePackage{algorithm}
+
 \RequirePackage{acronym}
 \RequirePackage{IEEEtrantools}
 
-\RequirePackage[
-  linesnumbered,
-  lined,
-  boxruled,
-  commentsnumbered,
-  algochapter
-]{algorithm2e}
 \RequirePackage{mathtools}
 \RequirePackage[table,usenames,svgnames,dvipsnames]{xcolor}
 \RequirePackage{longtable}
@@ -227,7 +220,9 @@
 \renewcommand{\theequation}{\thechapter-\arabic{equation}}
 \renewcommand{\thefigure}{\thechapter-\arabic{figure}}
 \renewcommand{\thetable}{\thechapter-\arabic{table}}
-%\renewcommand{\thealgorithm}{\thechapter--\arabic{algorithm}}
+\renewcommand{\thealgorithm}{\thechapter-\arabic{algorithm}}
+\renewcommand{\ALG@name}{算法}
+
 
 %% Tocbibind Package
 \RequirePackage{tocbibind}

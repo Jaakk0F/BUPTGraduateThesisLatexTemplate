@@ -2,21 +2,20 @@
 
 一些基本使用的例子
 
-
 \section{一级标题}
 \subsection{二级标题}
 \subsubsection{三级标题}
 
 \section{图表和表格}
 
-目前只实现了最基本的应用，没有实现官方word模板中使用题注的方式介绍详细图表信息。
+目前只实现了最基本的应用，没有实现官方word模板中使用题注的方式介绍详细图表信息。引用图\ref{fig:bupt_logo}和表\ref{tab:bupt_table}信息。
 
 参考文献\cite{ddpg}。
 
 \begin{figure}[htbp]
   \centering
   %\vspace{1 cm} % 使用该指令调整上下间距
-  \includegraphics[width=\textwidth]{resources/logo.png}
+  \includegraphics[width=0.5\textwidth]{resources/logo.png}
   \bicaption{中文标题}{English Caption} % 使用中英文标题
   %\caption{中文标题} % 只使用中文标题
   \label{fig:bupt_logo}
@@ -44,3 +43,35 @@
 \begin{equation}
   a + b = c
 \end{equation}
+
+
+\section{算法}
+
+目前算法的标题是中文。% 如果需要变成英文Algorithm，在`buptthesis.cls'文件当中注释掉`\renewcommand{\ALG@name}{算法}`这个代码。
+算法模块默认导入`algorithm'和`algorithmic'库，如果使用`algorithm2e'会发生冲突。引用算法\ref{alg:sum}信息。
+
+\begin{algorithm}[htbp]
+    \caption{algorithm of SUM}
+    \label{alg:sum}
+    \renewcommand{\algorithmicrequire}{\textbf{Input:}}
+    \renewcommand{\algorithmicensure}{\textbf{Output:}}
+    \begin{algorithmic}[1]
+        \REQUIRE $A$, $B$, $C$  %%input
+        \ENSURE EEEEE    %%output
+        
+        \STATE  AAAAA
+        \WHILE{$A=B$}
+            \STATE BBBBB
+        \ENDWHILE
+        
+        \FOR{each $i \in [1,10]$}
+            \IF {$C = 0$}
+                \STATE CCCCC
+            \ELSE
+                \STATE 使用中文
+            \ENDIF
+        \ENDFOR
+        
+        \RETURN EEEEE
+    \end{algorithmic}
+\end{algorithm}
