@@ -4,12 +4,16 @@
 %%
 %% Haojun Yang, Lu Hou and Jie Mei
 %%
+%%
+%% Copyright (C) 2024 -- 20XX by
+%%
+%% Jiajun Fu
 %% -----------------------------------------------------------------
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{buptthesis}
 [2023/12/09 v0.2 Beijing University of Posts and Telecommunications (BUPT) thesis document class]
-\typeout{-- See the "How_to_use_buptthesis" manual for usage information.}
+\typeout{-- See the "README.md" for basic usage information.}
 
 %% -----------------------------------------------------------------
 
@@ -262,9 +266,11 @@
 \ifBUPT@option@phd
   \def\BUPT@value@degree{\BUPT@label@phddegree}
   \def\BUPT@value@degreeEN{\BUPT@label@phddegreeEN}
+  \def\BUPT@value@thesisEN{\BUPT@label@phdthesisEN}
 \else
   \def\BUPT@value@degree{\BUPT@label@masterdegree}
   \def\BUPT@value@degreeEN{\BUPT@label@masterdegreeEN}
+  \def\BUPT@value@thesisEN{\BUPT@label@masterthesisEN}
 \fi
 
 %% Degree mode
@@ -369,7 +375,8 @@
 
 %% linespread行间距
 \setlength\parskip{\p@}%0\p@ \@plus 0.1\p@}
-\linespread{1.3} % 1.5倍行距，要求为20磅，小四号字体情况下差2磅
+\linespread{1.4} % 1.5倍行距，要求为20磅，小四号字体情况下差2磅
+%\setlength{\baselineskip}{2000pt}
 
 \setlength{\abovecaptionskip}{3pt} % 20240110修改图表和文本间距
 \setlength{\belowcaptionskip}{3pt}
@@ -550,7 +557,7 @@
     \includegraphics[width=15cm]{\BUPT@value@schoolen} % NOTE: 20240103新版官方英文封面
     \vskip \stretch{0.2}
     %{\heiti\fontsize{24}{\p@}\bfseries \BUPT@value@degreeEN~\BUPT@label@thesisEN} % NOTE: 20240103旧版本英文封面
-    {\zihao{-1} \BUPT@value@degreeEN~\BUPT@label@thesisEN}% NOTE: 20240103新版官方英文封面
+    {\zihao{-1} \BUPT@value@degreeEN~\BUPT@value@thesisEN}% NOTE: 20240103新版官方英文封面
     %\vskip \stretch{0.5} % NOTE: 20240103旧版本英文封面
     %\includegraphics[width=3.43cm]{\BUPT@value@schoollogo} % NOTE: 20240103旧版本英文封面
   \end{center}
