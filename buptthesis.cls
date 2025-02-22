@@ -176,6 +176,8 @@
 \RequirePackage{algorithmic}
 \RequirePackage{algorithm}
 
+\@addtoreset{algorithm}{chapter} % 使算法编号在每一章重新开始
+
 \RequirePackage{acronym}
 \RequirePackage{IEEEtrantools}
 
