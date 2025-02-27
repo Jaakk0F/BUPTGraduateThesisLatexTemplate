@@ -313,7 +313,7 @@
   \ifBUPT@option@cenhdr
     \fancypagestyle{BUPThdrstyle}{%
       \fancyhf{}%
-      \fancyhead[OC]{\zihao{-5} \leftmark}%
+      \fancyhead[OC]{\zihao{-5} \nouppercase{\leftmark}}% 奇数页页眉章节标题 英文字母全大写 ---> 修正为大小写正常显示
       \fancyhead[EC]{\zihao{-5} \BUPT@label@university\BUPT@value@degree\BUPT@label@thesis}%
       \fancyfoot[C]{\zihao{5} \thepage}%
       \renewcommand\headrulewidth{0.4\p@}%
