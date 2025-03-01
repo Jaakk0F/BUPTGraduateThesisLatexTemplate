@@ -165,7 +165,7 @@
   \RequirePackage{graphicx}
   %% In fact, the xunicode package has loaded the graphicx package.
 \fi
-\RequirePackage[font=footnotesize,subrefformat=parens]{subfig}
+\RequirePackage[font=small,subrefformat=parens]{subfig}
 
 %% Table and Array Packages
 \RequirePackage{makecell}
