@@ -16,7 +16,7 @@
 - `main.tex`：主文件，包含论文的各个部分
 - `bupt_thesis.cls`：模板文件，定义了论文的格式
 - `config/buptthesis.cfg`：配置文件，定义了论文的格式变量
-- `Bib\thesis.bib`：参考文献
+- `Bib/thesis.bib`：参考文献
 - `Chapter/Chapter_Example.tex`：中间章节的参考文件，每一章单独一个文件，注意在`main.tex`中引用
 - `Chapter/Chapter_enabstract.tex`：英文摘要
 - `Chapter/Chapter_cnabstract.tex`：中文摘要
@@ -26,6 +26,7 @@
 
 ## 改动日志
 
+- 2025.07.03: 封面当中两行学院的支持
 - 2025.02.21: 修正``博士学位''英文封面显示不正确
 - 2025.02.13: 更新``算法''模块功能
 - 2025.01.16：根据"学校 2025 年 1 月 15 日版本更新内容"进行修改

@@ -4,12 +4,16 @@
 %%
 %% Haojun Yang, Lu Hou and Jie Mei
 %%
+%%
+%% Copyright (C) 2024 -- 20XX by
+%%
+%% Jiajun Fu
 %% -----------------------------------------------------------------
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{buptthesis}
 [2023/12/09 v0.2 Beijing University of Posts and Telecommunications (BUPT) thesis document class]
-\typeout{-- See the "How_to_use_buptthesis" manual for usage information.}
+\typeout{-- See the "README.md" for basic usage information.}
 
 %% -----------------------------------------------------------------
 
@@ -161,7 +165,7 @@
   \RequirePackage{graphicx}
   %% In fact, the xunicode package has loaded the graphicx package.
 \fi
-\RequirePackage[font=footnotesize,subrefformat=parens]{subfig}
+\RequirePackage[font=small,subrefformat=parens]{subfig}
 
 %% Table and Array Packages
 \RequirePackage{makecell}
@@ -169,22 +173,13 @@
 \RequirePackage{multirow}
 
 %% Specialzed List Packages
+\RequirePackage{algorithmic}
+\RequirePackage{algorithm}
+
+\@addtoreset{algorithm}{chapter} % 使算法编号在每一章重新开始
 
 \RequirePackage{acronym}
 \RequirePackage{IEEEtrantools}
-
-%\RequirePackage{algorithm2e}
-%\RequirePackage{algorithmic}
-%\RequirePackage[
-%  linesnumbered,
-%  lined,
-%  boxruled,
-%  commentsnumbered,
-%  algochapter
-%]{algorithm2e}
-
-%\RequirePackage{algorithm}
-%\RequirePackage[compatible]{algpseudocode}
 
 \RequirePackage{mathtools}
 \RequirePackage[table,usenames,svgnames,dvipsnames]{xcolor}
@@ -231,8 +226,9 @@
 \renewcommand{\theequation}{\thechapter-\arabic{equation}}
 \renewcommand{\thefigure}{\thechapter-\arabic{figure}}
 \renewcommand{\thetable}{\thechapter-\arabic{table}}
-%\renewcommand{\thealgocf}{{\thechapter-\arabic{algocf}}
-%\renewcommand{\thealgorithm}{\thechapter--\arabic{algorithm}} % algolrithm包的命名方式
+\renewcommand{\thealgorithm}{\thechapter-\arabic{algorithm}}
+\renewcommand{\ALG@name}{算法}
+
 
 %% Tocbibind Package
 \RequirePackage{tocbibind}
@@ -272,9 +268,11 @@
 \ifBUPT@option@phd
   \def\BUPT@value@degree{\BUPT@label@phddegree}
   \def\BUPT@value@degreeEN{\BUPT@label@phddegreeEN}
+  \def\BUPT@value@thesisEN{\BUPT@label@phdthesisEN}
 \else
   \def\BUPT@value@degree{\BUPT@label@masterdegree}
   \def\BUPT@value@degreeEN{\BUPT@label@masterdegreeEN}
+  \def\BUPT@value@thesisEN{\BUPT@label@masterthesisEN}
 \fi
 
 %% Degree mode
@@ -315,7 +313,7 @@
   \ifBUPT@option@cenhdr
     \fancypagestyle{BUPThdrstyle}{%
       \fancyhf{}%
-      \fancyhead[OC]{\zihao{-5} \leftmark}%
+      \fancyhead[OC]{\zihao{-5} \nouppercase{\leftmark}}% 奇数页页眉章节标题 英文字母全大写 ---> 修正为大小写正常显示
       \fancyhead[EC]{\zihao{-5} \BUPT@label@university\BUPT@value@degree\BUPT@label@thesis}%
       \fancyfoot[C]{\zihao{5} \thepage}%
       \renewcommand\headrulewidth{0.4\p@}%
@@ -356,18 +354,18 @@
     aftername = \hspace{1 em},
    },
   subsection = {
-   format = \heiti\zihao{-4}\raggedright,
-   beforeskip = 0 em,
-   afterskip = 0 em,
-   aftername = \hspace{1 em},
-  },
+      format = \heiti\zihao{-4}\raggedright,
+      beforeskip = 0 em,
+      afterskip = 0 em,
+      aftername = \hspace{1 em},
+    },
   subsubsection = {
-   format = \songti\zihao{-4}\raggedright,
-   beforeskip = 0 em,
-   afterskip = 0 em,
-   aftername = \hspace{1 em},
-   name = {\qquad },
-  },
+      format = \songti\zihao{-4}\raggedright,
+      beforeskip = 0 em,
+      afterskip = 0 em,
+      aftername = \hspace{1 em},
+      name = {\qquad },
+    },
 }
 
 %% Names
@@ -379,7 +377,8 @@
 
 %% linespread行间距
 \setlength\parskip{\p@}%0\p@ \@plus 0.1\p@}
-\linespread{1.3} % 1.5倍行距，要求为20磅，小四号字体情况下差2磅
+\linespread{1.4} % 1.5倍行距，要求为20磅，小四号字体情况下差2磅
+%\setlength{\baselineskip}{2000pt}
 
 \setlength{\abovecaptionskip}{3pt} % 20240110修改图表和文本间距
 \setlength{\belowcaptionskip}{3pt}
@@ -542,7 +541,7 @@
   % parse institute
   \def\BUPT@variable@institute@first{\BUPT@value@institute}
   \def\BUPT@variable@institute@second{}
-  \expandafter\split@instituteCN\BUPT@value@institute\\\@nil
+  \expandafter\split@instituteCN\BUPT@value@institute\@nil
 
   \BUPT@setstr{\BUPT@value@studentid \\ \BUPT@value@name \\ \BUPT@value@major \\ \BUPT@value@supervisor \\ \BUPT@variable@institute@first \\ \BUPT@variable@institute@second}
   \BUPT@infomaxwidth{\BUPT@value@infomaxwidth}
@@ -562,7 +561,6 @@
         \ifx\BUPT@variable@institute@second\@empty \else 
         & \BUPTunderline{\BUPT@value@infomaxwidth}{\BUPT@variable@institute@second} \\
         \fi
-        
       \end{tabular}}
     \vskip \stretch{0.5}
     {\zihao{4}\bfseries \BUPT@value@pageYear 年 \BUPT@value@pageMonth 月 \BUPT@value@pageDay 日}
@@ -594,7 +592,7 @@
    % parse institute
   \def\BUPT@variable@instituteEN@first{\BUPT@value@institute}
   \def\BUPT@variable@instituteEN@second{}
-  \expandafter\split@instituteEN\BUPT@value@instituteEN\\\@nil
+  \expandafter\split@instituteEN\BUPT@value@instituteEN\@nil
 
   \BUPT@setstr{\BUPT@value@studentidEN \\ \BUPT@value@nameEN \\ \BUPT@value@majorEN \\ \BUPT@value@trainingmodeEN \\ \BUPT@value@supervisorEN \\ \BUPT@variable@instituteEN@first \\ \BUPT@variable@instituteEN@second}
   \BUPT@infomaxwidth{\BUPT@value@infomaxwidth}
@@ -652,21 +650,21 @@
     \renewcommand\arraystretch{1.5}
     \begin{tabular}{|>{\centering\arraybackslash}m{2cm} | >{\centering\arraybackslash}m{2cm} | >{\centering\arraybackslash}m{2cm} | >{\centering\arraybackslash}m{6.5cm}|}
       \hline
-      职务   & 姓\quad 名                               & 职\quad  称                              & 工\quad  作\quad  单\quad  位       \\
+      职务   & 姓\quad 名                                                                                                          & 职\quad  称                              & 工\quad  作\quad  单\quad  位              \\
       \hline
-      主席   & \BUPT@value@committeeChairName         & \BUPT@value@committeeChairTitle        & \BUPT@value@committeeChairOrgan        \\
+      主席   & \BUPT@value@committeeChairName                                                                                    & \BUPT@value@committeeChairTitle        & \BUPT@value@committeeChairOrgan        \\
       \hline
-      委员   & \BUPT@value@committeeMemberFirstName   & \BUPT@value@committeeMemberFirstTitle  & \BUPT@value@committeeMemberFirstOrgan  \\
+      委员   & \BUPT@value@committeeMemberFirstName                                                                              & \BUPT@value@committeeMemberFirstTitle  & \BUPT@value@committeeMemberFirstOrgan  \\
       \hline
-      委员   & \BUPT@value@committeeMemberSecondName  & \BUPT@value@committeeMemberSecondTitle & \BUPT@value@committeeMemberSecondOrgan \\
+      委员   & \BUPT@value@committeeMemberSecondName                                                                             & \BUPT@value@committeeMemberSecondTitle & \BUPT@value@committeeMemberSecondOrgan \\
       \hline
-      委员   & \BUPT@value@committeeMemberThirdName   & \BUPT@value@committeeMemberThirdTitle  & \BUPT@value@committeeMemberThirdOrgan  \\
+      委员   & \BUPT@value@committeeMemberThirdName                                                                              & \BUPT@value@committeeMemberThirdTitle  & \BUPT@value@committeeMemberThirdOrgan  \\
       \hline
-      委员   & \BUPT@value@committeeMemberFourthName  & \BUPT@value@committeeMemberFourthTitle & \BUPT@value@committeeMemberFourthOrgan \\
+      委员   & \BUPT@value@committeeMemberFourthName                                                                             & \BUPT@value@committeeMemberFourthTitle & \BUPT@value@committeeMemberFourthOrgan \\
       \hline
-      秘书   & \BUPT@value@committeeSecretaryName     & \BUPT@value@committeeSecretaryTitle    & \BUPT@value@committeeSecretaryOrgan    \\
+      秘书   & \BUPT@value@committeeSecretaryName                                                                                & \BUPT@value@committeeSecretaryTitle    & \BUPT@value@committeeSecretaryOrgan    \\
       \hline
-      答辩日期 & \multicolumn{3}{c|}{\BUPT@value@dissertationYear 年 \BUPT@value@dissertationMonth 月 \BUPT@value@dissertationDay 日}    \\
+      答辩日期 & \multicolumn{3}{c|}{\BUPT@value@dissertationYear 年 \BUPT@value@dissertationMonth 月 \BUPT@value@dissertationDay 日}                                                                                   \\
       \hline
     \end{tabular}
   \end{table*}
@@ -711,7 +709,7 @@
   \end{center}\par
   \zihao{4}
   \vspace{1ex}
-  }%
+}%
 {}
 \def\cnkeywords#1{%
   \vspace{2ex}{\bfseries\BUPT@label@keywords}#1}
@@ -724,7 +722,7 @@
   \end{center}\par
   \zihao{4}
   \vspace{2ex}
-  }%
+}%
 {}
 \def\enkeywords#1{%
   \vspace{4ex}{\textbf{\BUPT@label@keywordsEN}} #1}
@@ -756,6 +754,8 @@
 %% Publication
 \newenvironment{publication}[1][\BUPT@label@publications]{\chapter{#1}}{}
 
+%% Experience
+\newenvironment{experience}[1][\BUPT@label@experience]{\chapter{#1}}{}
 %% Hyperref package setup
 %\ifBUPT@option@electronic
 %  \hypersetup{%
@@ -773,12 +773,13 @@
 
 \ifBUPT@option@electronic
   \hypersetup{%
-    colorlinks=true, 
-    linkcolor=black, 
-    citecolor=black, 
-    filecolor=black, 
+    colorlinks=true,
+    linkcolor=black,
+    citecolor=black,
+    filecolor=black,
     urlcolor=black }
 \fi
+
 
 %% Extra definitions
 \def\cemph#1{\textcolor{RubineRed}{#1}}  % Emphasize with color RubineRed
@@ -800,7 +801,7 @@
 \def\lowerroman#1{\romannumeral#1}
 \def\myvec#1{\bm{\mathrm{#1}}}
 \newcommand{\cmathcomma}{\text{，}} % 改变颜色
-\newcommand{\cmathstop}{\text{。}} 
+\newcommand{\cmathstop}{\text{。}}
 
 %% -----------------------------------------------------------------
 
