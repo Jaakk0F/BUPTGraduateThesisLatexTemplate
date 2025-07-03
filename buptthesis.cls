@@ -510,13 +510,19 @@
 \ExplSyntaxOff
 
 % Parse institute information
-\def\split@instituteCN#1\\#2\@nil{%
+\def\split@instituteCNFirst#1\\#2\@nil{%
   \def\BUPT@variable@institute@first{#1}%
-  \def\BUPT@variable@institute@second{#2}%
+  \def\BUPT@variable@institute@temp{#2}%
 }
-\def\split@instituteEN#1\\#2\@nil{%
+\def\split@instituteCNSecond#1\\#2\@nil{
+  \def\BUPT@variable@institute@second{#1}%
+}
+\def\split@instituteENFirst#1\\#2\@nil{%
   \def\BUPT@variable@instituteEN@first{#1}%
-  \def\BUPT@variable@instituteEN@second{#2}%
+  \def\BUPT@variable@instituteEN@temp{#2}%
+}
+\def\split@instituteENSecond#1\\#2\@nil{
+  \def\BUPT@variable@instituteEN@second{#1}%
 }
 
 \def\BUPTunderline#1#2{\underline{\hbox to #1{\hss #2\hss}}}
@@ -540,8 +546,11 @@
 
   % parse institute
   \def\BUPT@variable@institute@first{\BUPT@value@institute}
+  \def\BUPT@variable@institute@temp{}
   \def\BUPT@variable@institute@second{}
-  \expandafter\split@instituteCN\BUPT@value@institute\@nil
+  %\def\BUPT@variable@institute@secondShow{}
+  \expandafter\split@instituteCNFirst\BUPT@value@institute\\\@nil
+  \expandafter\split@instituteCNSecond\BUPT@variable@institute@temp\\\@nil
 
   \BUPT@setstr{\BUPT@value@studentid \\ \BUPT@value@name \\ \BUPT@value@major \\ \BUPT@value@supervisor \\ \BUPT@variable@institute@first \\ \BUPT@variable@institute@second}
   \BUPT@infomaxwidth{\BUPT@value@infomaxwidth}
@@ -558,7 +567,7 @@
         \BUPT@label@trainingmode & \BUPTunderline{\BUPT@value@infomaxwidth}{\BUPT@value@trainingmode} \\
         \BUPT@label@supervisor   & \BUPTunderline{\BUPT@value@infomaxwidth}{\BUPT@value@supervisor}   \\
         \BUPT@label@institute    & \BUPTunderline{\BUPT@value@infomaxwidth}{\BUPT@variable@institute@first} \\
-        \ifx\BUPT@variable@institute@second\@empty \else 
+        \ifx\BUPT@variable@institute@second\@empty \else
         & \BUPTunderline{\BUPT@value@infomaxwidth}{\BUPT@variable@institute@second} \\
         \fi
       \end{tabular}}
@@ -590,9 +599,11 @@
   \vskip \stretch{0.2}  % NOTE: 20240103新版官方英文封面
    
    % parse institute
-  \def\BUPT@variable@instituteEN@first{\BUPT@value@institute}
+  \def\BUPT@variable@instituteEN@first{\BUPT@value@instituteEN}
   \def\BUPT@variable@instituteEN@second{}
-  \expandafter\split@instituteEN\BUPT@value@instituteEN\@nil
+  \def\BUPT@variable@instituteEN@temp{}
+  \expandafter\split@instituteENFirst\BUPT@value@instituteEN\\\@nil
+  \expandafter\split@instituteENSecond\BUPT@variable@instituteEN@temp{}\\\@nil
 
   \BUPT@setstr{\BUPT@value@studentidEN \\ \BUPT@value@nameEN \\ \BUPT@value@majorEN \\ \BUPT@value@trainingmodeEN \\ \BUPT@value@supervisorEN \\ \BUPT@variable@instituteEN@first \\ \BUPT@variable@instituteEN@second}
   \BUPT@infomaxwidth{\BUPT@value@infomaxwidth}
