@@ -1,4 +1,4 @@
-\documentclass[master,phil,fulltime,electronic,cenhdr,normaltoc]{buptthesis} % 学硕电子版
+\documentclass[master,phil,fulltime,electronic,cenhdr,normaltoc,blind]{buptthesis} % 学硕电子版
 %\documentclass[master,phil,fulltime,print,cenhdr,normaltoc]{buptthesis} % 学硕印刷版
 %\documentclass[master,eng,fulltime,electronic,cenhdr,normaltoc]{buptthesis} % 专硕电子版
 %\documentclass[master,eng,fulltime,print,cenhdr,normaltoc]{buptthesis} % 专硕印刷版
@@ -7,13 +7,22 @@
 %\documentclass[phd,eng,fulltime,electronic,cenhdr,normaltoc]{buptthesis} % 专博电子版
 %\documentclass[phd,eng,fulltime,print,cenhdr,normaltoc]{buptthesis} % 专博印刷版
 
-
 % !UPDATE 20231210: add to remove `normaltoc` to remove table content in the toc
 
 % 电子版和印刷版的区别
 % 1. 电子版是没有跳偶数页，所有内容都是直接连起来的
 % 2. 印刷版部分内容跳偶数页开头的，生成的PDF直接双页打印即可
 
+% 盲审版在选项后加入`blind`，比如学硕电子版的盲审版指令如下：
+% \documentclass[master,phil,fulltime,electronic,cenhdr,normaltoc,blind]{buptthesis} % 学硕电子版
+
+\makeatletter
+% 检查是否为盲审版本
+\newif\ifWithOptionBlind 
+\@ifclasswith{buptthesis}{blind}{\WithOptionBlindtrue}{\WithOptionBlindfalse}
+\makeatother
+
+% 导入宏包
 \usepackage{graphicx}
 \usepackage{bbding}
 \usepackage{booktabs}
@@ -26,8 +35,8 @@
 \DeclareMathOperator{\Tr}{Tr}
 
 % 正文当中的其他定义
-\setmainfont{Times New Roman}
-\setmathfont{XITS Math}
+\setmainfont{Times New Roman} % 英文字体使用Times New Roman
+\setmathfont{XITS Math} % 数学公式字体使用XITS Math
 
 \BUPTthesiscntitlepage{%
 	confidential = {公开}, % 目前只支持公开
@@ -79,31 +88,32 @@
 
 \begin{document}
 
-\makechinesetitle
-\makeenglishtitle
-\makecommitteelist
-\makestatement
+\makeprepages
 
 \frontmatter
 \include{Chapter/Chapter_cnabstract} % 中文摘要
 \include{Chapter/Chapter_enabstract} % 英文摘要
-\tableofcontents
+\tableofcontents % 目录
 \include{Chapter/Chapter_nomeclature} % 符号表
 % \listoffigures % NOTE:20230103旧模板
 % \listoftables % NOTE:20230103旧模板
 
 \mainmatter
-\include{Chapter/Chapter_Example}
+\include{Chapter/Chapter_Example} % 正文样例章节
 
 \bibliographystyle{gbt7714-numerical}
 {\zihao{5}
-	\bibliography{Bib/thesis}
+\bibliography{Bib/thesis} % 参考文献
 }
 
 \backmatter
 \include{Chapter/Chapter_abbreviation} % 缩写附录
+\ifWithOptionBlind \else
 \include{Chapter/Chapter_acknowledgement} % 致谢
+\fi
 \include{Chapter/Chapter_publication} % 创新成果
+\ifWithOptionBlind \else
 \include{Chapter/Chapter_experience} % 作者学习经历
+\fi
 
 \end{document}

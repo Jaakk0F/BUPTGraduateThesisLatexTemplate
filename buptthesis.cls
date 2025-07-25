@@ -33,6 +33,7 @@
 \newif\ifBUPT@option@parttime        \BUPT@option@parttimefalse
 \newif\ifBUPT@option@phil            \BUPT@option@philtrue
 \newif\ifBUPT@option@eng             \BUPT@option@engfalse
+\newif\ifBUPT@option@blind           \BUPT@option@blindfalse
 
 %%blankdblpage
 
@@ -70,6 +71,9 @@
   \BUPT@option@electronicfalse%
   \BUPT@option@printfalse%
   \BUPT@option@draftclstrue}
+\DeclareOption{blind}{
+  \BUPT@option@blindtrue%
+}
 
 \DeclareOption{cenhdr}{%
   \BUPT@option@cenhdrtrue}
@@ -286,6 +290,15 @@
   \def\BUPT@value@degreemodeEN{\BUPT@label@engmodeEN}
 \fi
 
+% Blind mode
+\ifBUPT@option@blind
+  \def\BUPT@value@degree{\BUPT@label@anonymousdegree}
+  \def\BUPT@value@degreeEN{\BUPT@label@anonymousdegreeEN}
+  \def\BUPT@value@degreemode{\BUPT@label@anonymousmode}
+  \def\BUPT@value@degreetype{\BUPT@label@anonymoustype}
+  \def\BUPT@value@degreemodeEN{\BUPT@label@anonymousmodeEN}
+\fi
+
 %% Training mode
 \ifBUPT@option@fulltime
   \def\BUPT@value@trainingmode{\BUPT@label@fulltime}
@@ -304,7 +317,9 @@
     \fancyhf{}%
     \fancyhead[OR]{\zihao{-5} \leftmark}%
     \fancyhead[OL,ER]{\zihao{-5} DRAFT}%
-    \fancyhead[EL]{\zihao{-5} \BUPT@label@university\BUPT@value@degree\BUPT@label@thesis}%
+    \fancyhead[EL]{\zihao{-5}
+      \BUPT@label@university\BUPT@value@degree\BUPT@label@thesis
+    }%
     \fancyhead[EC]{\zihao{-5} \oldtoday}%
     \fancyfoot[C]{\zihao{5} \thepage}%
     \renewcommand\headrulewidth{0.4\p@}%
@@ -314,7 +329,9 @@
     \fancypagestyle{BUPThdrstyle}{%
       \fancyhf{}%
       \fancyhead[OC]{\zihao{-5} \nouppercase{\leftmark}}% 奇数页页眉章节标题 英文字母全大写 ---> 修正为大小写正常显示
-      \fancyhead[EC]{\zihao{-5} \BUPT@label@university\BUPT@value@degree\BUPT@label@thesis}%
+      \fancyhead[EC]{\zihao{-5}
+        \BUPT@label@university\BUPT@value@degree\BUPT@label@thesis
+      }
       \fancyfoot[C]{\zihao{5} \thepage}%
       \renewcommand\headrulewidth{0.4\p@}%
       \renewcommand\footrulewidth{0\p@}}
@@ -322,8 +339,9 @@
     \fancypagestyle{BUPThdrstyle}{%
       \fancyhf{}%
       \fancyhead[OR]{\zihao{-5} \leftmark}%
-      \fancyhead[EL]{\zihao{-5} \BUPT@label@university\BUPT@value@degreetype\BUPT@value@degree\BUPT@label@thesis}%
-      %\BUPT@label@university\BUPT@value@degreetype\BUPT@value@degree\BUPT@label@thesis}%
+      \fancyhead[EL]{\zihao{-5}
+        \BUPT@label@university\BUPT@value@degree\BUPT@label@thesis
+      }
       \fancyfoot[C]{\zihao{5} \thepage}%
       \renewcommand\headrulewidth{0.4\p@}%
       \renewcommand\footrulewidth{0\p@}}
@@ -346,26 +364,26 @@
     afterskip = 2 em,
     pagestyle = BUPThdrstyle,
     aftername = \hspace{1 em},
-   },
+  },
   section = {
     format = \heiti\zihao{4}\raggedright,
     beforeskip = 0.5 em,
     afterskip = 0.5 em,
     aftername = \hspace{1 em},
-   },
+  },
   subsection = {
       format = \heiti\zihao{-4}\raggedright,
       beforeskip = 0 em,
       afterskip = 0 em,
       aftername = \hspace{1 em},
-    },
+  },
   subsubsection = {
       format = \songti\zihao{-4}\raggedright,
       beforeskip = 0 em,
       afterskip = 0 em,
       aftername = \hspace{1 em},
       name = {\qquad },
-    },
+  },
 }
 
 %% Names
@@ -533,7 +551,9 @@
   \begin{center}
     \includegraphics[width=12.67cm]{\BUPT@value@schoolname}
     \vskip \stretch{0.5}
-    {\heiti\fontsize{32}{\p@}\bfseries \BUPT@value@degree\BUPT@label@thesis （\BUPT@value@degreemode）}
+    {\heiti\fontsize{32}{\p@}\bfseries 
+      \BUPT@value@degree\BUPT@label@thesis（\BUPT@value@degreemode）
+    }
     \vskip \stretch{0.5}
     \includegraphics[width=3.43cm]{\BUPT@value@schoollogo}
   \end{center}
@@ -543,6 +563,13 @@
     \BUPT@printcovertitle
   \end{center}
   \newlength{\BUPT@value@infomaxwidth}
+
+  % anonymous support
+  \ifBUPT@option@blind
+    \def\BUPT@value@name{\BUPT@value@anonymousname}
+    \def\BUPT@value@supervisor{\BUPT@value@anonymoussupervisor}
+    \def\BUPT@value@studentid{\BUPT@value@anonymousstudentid}
+  \fi
 
   % parse institute
   \def\BUPT@variable@institute@first{\BUPT@value@institute}
@@ -587,7 +614,9 @@
     \includegraphics[width=15cm]{\BUPT@value@schoolen} % NOTE: 20240103新版官方英文封面
     \vskip \stretch{0.2}
     %{\heiti\fontsize{24}{\p@}\bfseries \BUPT@value@degreeEN~\BUPT@label@thesisEN} % NOTE: 20240103旧版本英文封面
-    {\zihao{-1} \BUPT@value@degreeEN~\BUPT@label@thesisEN}% NOTE: 20240103新版官方英文封面
+    {\zihao{-1}
+      \BUPT@value@degreeEN~\BUPT@value@thesisEN
+    }% NOTE: 20240103新版官方英文封面
     %\vskip \stretch{0.5} % NOTE: 20240103旧版本英文封面
     %\includegraphics[width=3.43cm]{\BUPT@value@schoollogo} % NOTE: 20240103旧版本英文封面
   \end{center}
@@ -597,8 +626,14 @@
     \BUPT@printcovertitleEN
   \end{center}
   \vskip \stretch{0.2}  % NOTE: 20240103新版官方英文封面
-   
-   % parse institute
+
+  % anonymous support
+  \ifBUPT@option@blind
+    \def\BUPT@value@nameEN{\BUPT@value@anonymousnameEN}
+    \def\BUPT@value@supervisorEN{\BUPT@value@anonymoussupervisorEN}
+  \fi
+
+  % parse institute
   \def\BUPT@variable@instituteEN@first{\BUPT@value@instituteEN}
   \def\BUPT@variable@instituteEN@second{}
   \def\BUPT@variable@instituteEN@temp{}
@@ -656,6 +691,27 @@
     {\heiti \zihao{3} \BUPT@label@committeelist} \par
   \end{center}
 
+  \ifBUPT@option@blind
+    \def\BUPT@value@committeeChairName{\@empty}
+    \def\BUPT@value@committeeChairTitle{\@empty}
+    \def\BUPT@value@committeeChairOrgan{\@empty}
+    \def\BUPT@value@committeeMemberFirstName{\@empty}
+    \def\BUPT@value@committeeMemberFirstTitle{\@empty}
+    \def\BUPT@value@committeeMemberFirstOrgan{\@empty}
+    \def\BUPT@value@committeeMemberSecondName{\@empty}
+    \def\BUPT@value@committeeMemberSecondTitle{\@empty}
+    \def\BUPT@value@committeeMemberSecondOrgan{\@empty}
+    \def\BUPT@value@committeeMemberThirdName{\@empty}
+    \def\BUPT@value@committeeMemberThirdTitle{\@empty}
+    \def\BUPT@value@committeeMemberThirdOrgan{\@empty}
+    \def\BUPT@value@committeeMemberFourthName{\@empty}
+    \def\BUPT@value@committeeMemberFourthTitle{\@empty}
+    \def\BUPT@value@committeeMemberFourthOrgan{\@empty}
+    \def\BUPT@value@committeeSecretaryName{\@empty}
+    \def\BUPT@value@committeeSecretaryTitle{\@empty}
+    \def\BUPT@value@committeeSecretaryOrgan{\@empty}
+  \fi
+
   \begin{table*}[htbp]
     \centering
     \renewcommand\arraystretch{1.5}
@@ -710,6 +766,20 @@
   \BUPT@label@supervisorsignature\BUPTunderline{100\p@}{}\hfil\BUPT@label@issuedate\BUPTunderline{100\p@}{}
   \cleardoublepage
 }%
+
+% Pre-pages
+\def\makeprepages{%
+  % Chinese title
+  \makechinesetitle
+  % English title
+  \makeenglishtitle
+  % Dissertation pages
+  \makecommitteelist
+  % Statement Pages
+  \ifBUPT@option@blind \else
+    \makestatement
+  \fi
+}
 
 %% Abstract
 \newenvironment{cnabstract}{%
